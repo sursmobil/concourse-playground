@@ -3,6 +3,7 @@ platform: linux
 
 inputs:
 - name: self-update-src
+- name: ci-src
 
 run:
   path: self-update-src/tasks/set-pipelines.sh
