@@ -8,11 +8,20 @@ resources:
   type: git
   source: ((src-repo))
 
-# - name: self-update-docker
-#   type: docker-image
-#   source: ((docker-repo))
+- name: self-update-docker
+  type: docker-image
+  source: ((docker-repo))
 
 jobs:
+- name: build-self-update-docker
+  plan:
+  - get: self-update-src
+  - put: self-update-docker
+    params:
+      build: self-update-src/
+      build_args:
+        concourse_url: ((concourse-url))
+        
 - name: ci-update
   plan:
   - aggregate:
