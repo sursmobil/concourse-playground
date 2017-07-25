@@ -2,20 +2,15 @@ resources:
 - name: self-update-src
   type: git
   source:
-    repository: https://github.com/sursmobil/concourse-playground.git
+    repository: https://github.com/sursmobil/concourse-self-update.git
 
 - name: ci-src
   type: git
-  source:
-    repository: ((src-repo-url))
-    username: ((src-repo-user))
-    password: ((src-repo-pass))
+  source: ((src-repo))
 
-- name: self-update-docker
-  type: docker-image
-  source:
-    repository: ((docker-repo-url))
-    insecure_registries: ((docker-repo-insecure-registries))
+# - name: self-update-docker
+#   type: docker-image
+#   source: ((docker-repo))
 
 jobs:
 - name: ci-update
