@@ -4,5 +4,5 @@ set -e
 set -x
 
 echo "Yupi!"
-ifconfig
+ip a
 ping ${CONCOURSE_URL} -c 1
