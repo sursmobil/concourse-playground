@@ -27,6 +27,8 @@ jobs:
   - aggregate:
     - get: self-update-src
     - get: self-update-docker
+      passed:
+      - build-self-update-docker
     - get: ci-src
       trigger: true
 
