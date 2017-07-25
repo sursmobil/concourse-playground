@@ -38,3 +38,4 @@ jobs:
     params:
       CONCOURSE_URL: ((concourse-url))
       CONCOURSE_LOGIN: ((concourse-login))
+      SELF_UPDATE_NAME: ((name))
