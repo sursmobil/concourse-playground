@@ -13,5 +13,6 @@ for config in $(ls); do
   NAME=$(echo $config | awk -F. '{print $1}')
   echo $NAME
   fly -t target set-pipeline -p $NAME -c $config -n
+  fly -t target unpause-pipeline -p $NAME
 done
 popd >/dev/null
