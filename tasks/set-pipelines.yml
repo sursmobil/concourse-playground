@@ -4,5 +4,8 @@ platform: linux
 inputs:
 - name: self-update-src
 
+image_resource:
+  repository: ubuntu
+
 run:
   path: self-update-src/tasks/set-pipelines.sh
