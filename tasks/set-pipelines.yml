@@ -1,0 +1,8 @@
+---
+platform: linux
+
+inputs:
+- name: self-update-src
+
+run:
+  path: self-update-src/tasks/set-pipelines.sh

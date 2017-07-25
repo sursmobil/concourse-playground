@@ -1,0 +1,28 @@
+resources:
+- name: self-update-src
+  type: git
+  source:
+    repository: https://github.com/sursmobil/concourse-playground.git
+
+- name: ci-src
+  type: git
+  source:
+    repository: ((src-repo-url))
+    username: ((src-repo-user))
+    password: ((src-repo-pass))
+
+- name: self-update-docker
+  type: docker-image
+  source:
+    repository: ((docker-repo-url))
+    insecure_registries: ((docker-repo-insecure-registries))
+
+jobs:
+- name: ci-update
+  plan:
+  - aggregate:
+    - get: self-update-src
+    - get: ci-src
+      trigger: true
+  - task: set-pipelines
+    file: self-update-src/tasks/set-pipelines.yml
