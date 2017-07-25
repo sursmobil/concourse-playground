@@ -18,7 +18,7 @@ jobs:
   - get: self-update-src
   - put: self-update-docker
     params:
-      build: self-update-src/
+      build: self-update-src/image
       build_args:
         concourse_url: ((concourse-url))
 
