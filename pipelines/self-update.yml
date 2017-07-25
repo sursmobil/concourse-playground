@@ -2,7 +2,7 @@ resources:
 - name: self-update-src
   type: git
   source:
-    repository: https://github.com/sursmobil/concourse-self-update.git
+    uri: https://github.com/sursmobil/concourse-self-update.git
 
 - name: ci-src
   type: git
