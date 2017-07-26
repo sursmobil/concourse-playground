@@ -16,6 +16,7 @@ jobs:
 - name: build-self-update-docker
   plan:
   - get: self-update-src
+    trigger: true
   - put: self-update-docker
     params:
       build: self-update-src/image
