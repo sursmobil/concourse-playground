@@ -33,20 +33,22 @@ jobs:
     - get: ci-src
       trigger: true
 
-  - params:
-      CI_SRC: ci-src
-      CI_GEN: ci-gen
-    try:
-      task: generate-ci
-      file: ci-src/update/generate.yml
-
-      config:
-        outputs:
-          - name: ci-gen
-
-  - task: set-pipelines
+  - task: set-static-pipelines
     file: self-update-src/tasks/set-pipelines.yml
     image: self-update-docker
+    params:
+      CONCOURSE_URL: ((concourse-url))
+      CONCOURSE_LOGIN: ((concourse-login))
+      SELF_UPDATE_NAME: ((name))
+
+  - task: generate-ci
+    file: ci-src/update/generate.yml
+
+  - task: set-generated-pipelines
+    file: self-update-src/tasks/set-pipelines.yml
+    image: self-update-docker
+    input_mapping:
+      ci-src: ci-gen
     params:
       CONCOURSE_URL: ((concourse-url))
       CONCOURSE_LOGIN: ((concourse-login))
