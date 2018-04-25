@@ -10,7 +10,7 @@ pushd pipelines >/dev/null
 touch pipelines.yaml
 echo "pipelines:" > pipelines.yaml
 
-for config in $(ls); do
+for config in $(ls | grep -v pipelines.yaml); do
   NAME=$(echo $config | awk -F. '{print $1}')
   CONFIG_FILE="pipelines/$config"
 
