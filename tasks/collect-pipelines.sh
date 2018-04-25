@@ -23,6 +23,10 @@ for config in $(ls); do
 
 done
 
+echo ""
+echo "Generated file: "
+echo ""
+
 cat pipelines.yaml
 
 popd >/dev/null

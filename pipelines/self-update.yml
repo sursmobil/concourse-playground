@@ -32,12 +32,12 @@ jobs:
   - task: generate-ci
     file: ci-src/update/generate.yml
   - task: collect-pipelines
-    file: pipelines/pipelines.yaml
+    file: self-update-src/tasks/collect-pipelines.yml
     params:
       TEAM: ((team_name))
   - put: pipelines
     params:
-      pipelines_file: ((pipelines_file_path))
+      pipelines_file: pipelines/pipelines.yaml
 
 
 
