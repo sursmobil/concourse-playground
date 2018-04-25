@@ -2,9 +2,9 @@
 name: self-update
 
 src-repo:
-    uri: https://github.com/any.git
-    username: user
-    password: pass
+  uri: https://github.com/ci-src.git
+  username: user
+  password: pass
 
 concourse-url: url
 
