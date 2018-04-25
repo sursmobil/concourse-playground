@@ -1,55 +1,44 @@
+resource_types:
+- name: concourse-pipeline
+  type: docker-image
+  source:
+    repository: concourse/concourse-pipeline-resource
+
 resources:
 - name: self-update-src
   type: git
   source:
-    uri: https://github.com/sursmobil/concourse-self-update.git
+    uri: https://github.com/marcinrejdych/concourse-self-update.git
 
 - name: ci-src
   type: git
   source: ((src-repo))
 
-- name: self-update-docker
-  type: docker-image
-  source: ((docker-repo))
+- name: pipelines
+  type: concourse-pipeline
+  source:
+    target: ((concourse-url))
+    teams:
+    - ((team))
 
 jobs:
-- name: build-self-update-docker
-  plan:
-  - get: self-update-src
-    trigger: true
-  - put: self-update-docker
-    params:
-      build: self-update-src/image
-      build_args:
-        concourse_url: ((concourse-url))
-
 - name: update-pipelines
+  serial: true
   plan:
   - aggregate:
     - get: self-update-src
-    - get: self-update-docker
-      passed:
-      - build-self-update-docker
     - get: ci-src
       trigger: true
-
-  - task: set-static-pipelines
-    file: self-update-src/tasks/set-pipelines.yml
-    image: self-update-docker
-    params:
-      CONCOURSE_URL: ((concourse-url))
-      CONCOURSE_LOGIN: ((concourse-login))
-      SELF_UPDATE_NAME: ((name))
-
   - task: generate-ci
     file: ci-src/update/generate.yml
-
-  - task: set-generated-pipelines
-    file: self-update-src/tasks/set-pipelines.yml
-    image: self-update-docker
-    input_mapping:
-      ci-src: ci-gen
+  - task: collect-pipelines
+    file: pipelines/pipelines.yaml
     params:
-      CONCOURSE_URL: ((concourse-url))
-      CONCOURSE_LOGIN: ((concourse-login))
-      SELF_UPDATE_NAME: ((name))
+      TEAM: ((team_name))
+  - put: pipelines
+    params:
+      pipelines_file: ((pipelines_file_path))
+
+
+
+

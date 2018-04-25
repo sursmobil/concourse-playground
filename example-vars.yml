@@ -2,13 +2,14 @@
 name: self-update
 
 src-repo:
-    uri: https://github.com/my-org/my-repo.git
-    username: me
-    password: my-secret
+    uri: https://github.com/any.git
+    username: user
+    password: pass
 
-docker-repo:
-    repository: 192.168.100.1:5000/concourse-self-update
-    insecure_registries: ["192.168.100.1:5000"]
+concourse-url: url
 
-concourse-url: http://192.168.100.4:8080
-concourse-login: ""
+team_name: team
+team:
+  name: team
+  username: username
+  password: password
