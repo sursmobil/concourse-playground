@@ -8,7 +8,7 @@ cp ci-gen/pipelines/* pipelines
 pushd pipelines >/dev/null
 
 touch pipelines.yaml
-echo "pipelines" > pipelines.yaml
+
 
 for config in $(ls); do
   NAME=$(echo $config | awk -F. '{print $1}')
