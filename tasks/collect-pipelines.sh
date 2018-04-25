@@ -3,9 +3,7 @@
 set -e
 set -x
 
-mkdir pipelines
 cp ci-gen/* pipelines
-cp ci-src/pipelines/* pipelines
 
 pushd pipelines >/dev/null
 
