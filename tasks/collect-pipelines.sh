@@ -3,7 +3,7 @@
 set -e
 set -x
 
-cp ci-gen/* pipelines
+cp ci-gen/pipelines/* pipelines
 
 pushd pipelines >/dev/null
 
