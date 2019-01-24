@@ -1,0 +1,21 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: bash
+
+inputs:
+- name: self-update-src
+- name: ci-src
+- name: ci-gen
+
+outputs:
+- name: pipelines
+
+params:
+  TEAM: ((team))
+
+run:
+  path: self-update-src/tasks/collect-pipelines.sh
